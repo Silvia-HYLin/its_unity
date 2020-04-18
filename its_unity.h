@@ -57,10 +57,12 @@ int determineLen(const int carFlow[4][CMN], bool LEW){
     for(int i=0; i<4; i++){
         bool flag = true;
         for(int j=0;j<CMN;j++){
-            if(carFlow[i][j]==1 || flag){
+            if(carFlow[i][j]==1){
                 sum[i] += 1;
                 flag = false;
             }
+            else if(flag)
+                sum[i] += 1;
             else
                 break;
         }
@@ -68,8 +70,7 @@ int determineLen(const int carFlow[4][CMN], bool LEW){
     if(LEW){
         printf("lightLength = %2d \n",(sum[0]+sum[1])/2);
         return (sum[0]+sum[1])/2;
-    }
-        
+    }  
     else{
         printf("lightLength = %2d \n",(sum[2]+sum[3])/2);
         return (sum[2]+sum[3])/2;
