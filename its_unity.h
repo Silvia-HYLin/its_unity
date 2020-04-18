@@ -17,7 +17,7 @@ void printout(int carFlow[4][CMN]){
     }
 }
 
-bool determineSeq1(int carFlow[4][CMN]){   //binary //EW->true
+bool determineSeq1(const int carFlow[4][CMN]){   //binary //EW->true
     int sum[4]={0};
     for(int i=0;i<4;i++){
         for(int j=0;j<CMN;j++){
@@ -25,27 +25,34 @@ bool determineSeq1(int carFlow[4][CMN]){   //binary //EW->true
                 sum[i]=sum[i]+pow(2,9-j);
         }
     }
-    if((sum[0]+sum[1])>(sum[2]+sum[3]))
+    if((sum[0]+sum[1])>(sum[2]+sum[3])){
+        printf("East West go with ");
         return true;    //EW green
-    else
+    }  
+    else{
+        printf("South North go with ");
         return false;
-
+    }
 }
 
-bool determineSeq2(int carFlow[4][CMN]){   //linear
+bool determineSeq2(const int carFlow[4][CMN]){   //linear
     int sum[4]={0};
     for(int i=0;i<3;i++){
         for(int j=0;j<CMN;j++){
             sum[i]=sum[i]+(10-j)*carFlow[i][j];
         }
     }
-    if((sum[0]+sum[1])>(sum[2]+sum[3]))
+    if((sum[0]+sum[1])>(sum[2]+sum[3])){
+        printf("East West go with ");
         return true;    //EW green
-    else
+    }  
+    else{
+        printf("South North go with ");
         return false;
+    }
 }
 
-int determineLen(int carFlow[4][CMN], bool LEW){
+int determineLen(const int carFlow[4][CMN], bool LEW){
     int sum[4]={0};
     for(int i=0; i<4; i++){
         bool flag = true;
@@ -58,10 +65,16 @@ int determineLen(int carFlow[4][CMN], bool LEW){
                 break;
         }
     }
-    if(LEW)
+    if(LEW){
+        printf("lightLength = %2d \n",(sum[0]+sum[1])/2);
         return (sum[0]+sum[1])/2;
-    else
+    }
+        
+    else{
+        printf("lightLength = %2d \n",(sum[2]+sum[3])/2);
         return (sum[2]+sum[3])/2;
+    }
+        
 }
 
 int waitingTime(int carFlow[4][CMN], bool LEW){

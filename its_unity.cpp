@@ -1,40 +1,42 @@
-#include "20200417.h"
+#include "its_unity.h"
 
 int main(){
     srand(time(NULL));
     int carFlow[4][CMN];    //carFlow[] = {East, West, South, North}
-    bool LEW = true;    //if LEW = true([0][1] pass);-->LightSN = false
-    int lightLength = -1;    //green light length
-    int waitingTimeSum = 0;
-    int waitTime = 0;
-    int t = 1;
-    for(int i=0;i<4;i++){
+    bool LEW = true;        //if LEW = true([0][1] pass);-->LightSN = false
+    int lightLength = -1;   //green light length
+    int waitTimeSum = 0; //count for efficiency
+    int waitTimeLight = 0;  //waiting time sum before change light
+    int waitTimePerSec = 0; //waiting time every second
+    int t = 0;              //time counter
+    for(int i=0;i<4;i++){   //carFlow initialization at t = 0
         for(int j=0;j<CMN;j++){
-            if((double)rand()/(RAND_MAX+1.0)>=p)
-                carFlow[i][j]=1;
+            if((double)rand()/(RAND_MAX+1.0) >= p)
+                carFlow[i][j] = 1;
             else
-                carFlow[i][j]=0;
+                carFlow[i][j] = 0;
         }
     }
-    
+    //print out initial car flow
+    printf("initial\n");
+    printout(carFlow);
+    printf("\n");
     while(1){
-        if(lightLength==0){
-            if(LEW)
-                printf("South North Stop AVWT %3lf \n",((double)waitTime));
-            else
-                printf("East West Stop AVWT %3lf \n",((double)waitTime));
-        }
-        printout(carFlow);
-        if(lightLength<=0){
+        if(lightLength<=0){ //determine which side turn when lightLength==0
+            if(LEW!=determineSeq1(carFlow)&&(lightLength!=-1)){    //if change the light, then waitTimeLight = 0
+                printf("waiting time before light change = %d \n===light change===\n", waitTimeLight);
+                waitTimeLight = 0;
+            }
             LEW = determineSeq1(carFlow);
             lightLength = determineLen(carFlow, LEW);
-            waitTime = 0;
+            printf("===============\n");
         }
-        t = waitingTime(carFlow, LEW);
-        waitingTimeSum = waitingTimeSum + t;
+        //calculate waitingTime
+        waitTimePerSec = waitingTime(carFlow, LEW);
+        waitTimeLight += waitTimePerSec;
+        waitTimeSum += waitTimePerSec;
+        //car move
         if(LEW){    //EW pass, SN stop
-            printf("East and West go %2d \n",lightLength);
-            waitTime = waitTime+t;
             for(int i=0;i<2;i++){   //EW move forward directly
                 for(int j=0;j<CMN-1;j++){
                     carFlow[i][j]=carFlow[i][j+1];
@@ -60,7 +62,6 @@ int main(){
             }
         }
         else{           //EW stop, SN pass
-            printf("South and North go %2d \n",lightLength);
             for(int i=2;i<4;i++){   //SN move forward directly
                 for(int j=0;j<CMN-1;j++){
                     carFlow[i][j]=carFlow[i][j+1];
@@ -86,6 +87,9 @@ int main(){
             }
         }
         lightLength = lightLength-1;
+        t++;
+        printout(carFlow);
+        printf("finish this round\nt = %2d end, lightLength left %d, waitTimePerSec = %d \n", t, lightLength, waitTimePerSec);
         cin.get();
     }
     
