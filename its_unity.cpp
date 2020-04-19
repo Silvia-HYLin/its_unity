@@ -23,12 +23,13 @@ int main(){
     printf("\n");
     while(1){
         if(lightLength<=0){ //determine which side turn when lightLength==0
-            if(LEW!=determineSeq1(carFlow)&&(lightLength!=-1)){    //if change the light, then waitTimeLight = 0
+            bool temp_LEW = determineSeq1(carFlow);
+            if(LEW!=temp_LEW&&(lightLength!=-1)){    //if change the light, then waitTimeLight = 0
                 printf("waiting time before light change = %d \n", waitTimeLight);
                 printf("average waiting time before light change per car = %d \n===light change===\n", waitTimeLight/waitTimePerSec);
                 waitTimeLight = 0;
             }
-            LEW = determineSeq1(carFlow);
+            LEW = temp_LEW;
             lightLength = determineLen(carFlow, LEW);
             printf("===============\n");
         }
