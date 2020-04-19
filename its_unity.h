@@ -26,11 +26,9 @@ bool determineSeq1(const int carFlow[4][CMN]){   //binary //EW->true
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
-        printf("East West go with ");
         return true;    //EW green
     }  
     else{
-        printf("South North go with ");
         return false;
     }
 }
@@ -43,11 +41,9 @@ bool determineSeq2(const int carFlow[4][CMN]){   //linear
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
-        printf("East West go with ");
         return true;    //EW green
     }  
     else{
-        printf("South North go with ");
         return false;
     }
 }

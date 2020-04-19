@@ -30,6 +30,10 @@ int main(){
                 waitTimeLight = 0;
             }
             LEW = temp_LEW;
+            if(LEW)
+                printf("East West go with ");
+            else
+                printf("South North go with ");
             lightLength = determineLen(carFlow, LEW);
             printf("===============\n");
         }
