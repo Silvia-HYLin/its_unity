@@ -17,12 +17,11 @@ void printout(int carFlow[4][CMN]){
     }
 }
 
-bool determineSeq1(const int carFlow[4][CMN]){   //binary //EW->true
+bool determineSeq1(const int carFlow[4][CMN]){   //O(1)
     int sum[4]={0};
-    for(int i=0;i<4;i++){
+    for(int i=0;i<3;i++){
         for(int j=0;j<CMN;j++){
-            if(carFlow[i][j]==1)
-                sum[i]=sum[i]+pow(2,9-j);
+            sum[i]=sum[i]+carFlow[i][j];
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
@@ -33,11 +32,12 @@ bool determineSeq1(const int carFlow[4][CMN]){   //binary //EW->true
     }
 }
 
-bool determineSeq2(const int carFlow[4][CMN]){   //linear
+bool determineSeq2(const int carFlow[4][CMN]){   //O(logn)
     int sum[4]={0};
     for(int i=0;i<3;i++){
         for(int j=0;j<CMN;j++){
-            sum[i]=sum[i]+(10-j)*carFlow[i][j];
+            if(carFlow[i][j]==1)
+                sum[i]=sum[i]+log(10-j)*carFlow[i][j];
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
@@ -47,6 +47,103 @@ bool determineSeq2(const int carFlow[4][CMN]){   //linear
         return false;
     }
 }
+
+bool determineSeq3(const int carFlow[4][CMN]){   //O(sqrt(n))
+    int sum[4]={0};
+    for(int i=0;i<4;i++){
+        for(int j=0;j<CMN;j++){
+            if(carFlow[i][j]==1)
+                sum[i]=sum[i]+sqrt(10-j)*carFlow[i][j];
+        }
+    }
+    if((sum[0]+sum[1])>(sum[2]+sum[3])){
+        return true;    //EW green
+    }  
+    else{
+        return false;
+    }
+}
+
+bool determineSeq4(const int carFlow[4][CMN]){   //O(n)
+    int sum[4]={0};
+    for(int i=0;i<3;i++){
+        for(int j=0;j<CMN;j++){
+            if(carFlow[i][j]==1)
+                sum[i]=sum[i]+(10-j)*carFlow[i][j];
+        }
+    }
+    if((sum[0]+sum[1])>(sum[2]+sum[3])){
+        return true;    //EW green
+    }  
+    else{
+        return false;
+    }
+}
+
+bool determineSeq5(const int carFlow[4][CMN]){   //O(n^2)
+    int sum[4]={0};
+    for(int i=0;i<4;i++){
+        for(int j=0;j<CMN;j++){
+            if(carFlow[i][j]==1)
+                sum[i]=sum[i]+(10-j)*(10-j)*carFlow[i][j];
+        }
+    }
+    if((sum[0]+sum[1])>(sum[2]+sum[3])){
+        return true;    //EW green
+    }  
+    else{
+        return false;
+    }
+}
+
+bool determineSeq6(const int carFlow[4][CMN]){   //O(n^3)
+    int sum[4]={0};
+    for(int i=0;i<4;i++){
+        for(int j=0;j<CMN;j++){
+            if(carFlow[i][j]==1)
+                sum[i]=sum[i]+pow((10-j),3);
+        }
+    }
+    if((sum[0]+sum[1])>(sum[2]+sum[3])){
+        return true;    //EW green
+    }  
+    else{
+        return false;
+    }
+}
+
+bool determineSeq7(const int carFlow[4][CMN]){   //binary
+    int sum[4]={0};
+    for(int i=0;i<4;i++){
+        for(int j=0;j<CMN;j++){
+            if(carFlow[i][j]==1)
+                sum[i]=sum[i]+pow(2,10-j);
+        }
+    }
+    if((sum[0]+sum[1])>(sum[2]+sum[3])){
+        return true;    //EW green
+    }  
+    else{
+        return false;
+    }
+}
+
+bool determineSeq8(const int carFlow[4][CMN]){   //O(n^n)
+    int sum[4]={0};
+    for(int i=0;i<4;i++){
+        for(int j=0;j<CMN;j++){
+            if(carFlow[i][j]==1)
+                sum[i]=sum[i]+pow(10-j,10-j);
+        }
+    }
+    if((sum[0]+sum[1])>(sum[2]+sum[3])){
+        return true;    //EW green
+    }  
+    else{
+        return false;
+    }
+}
+
 
 int determineLen(const int carFlow[4][CMN], bool LEW){
     int sum[4]={0};
@@ -64,11 +161,11 @@ int determineLen(const int carFlow[4][CMN], bool LEW){
         }
     }
     if(LEW){
-        printf("lightLength = %2d \n",(sum[0]+sum[1])/2);
+        // printf("lightLength = %2d \n",(sum[0]+sum[1])/2);
         return (sum[0]+sum[1])/2;
     }  
     else{
-        printf("lightLength = %2d \n",(sum[2]+sum[3])/2);
+        // printf("lightLength = %2d \n",(sum[2]+sum[3])/2);
         return (sum[2]+sum[3])/2;
     }
         

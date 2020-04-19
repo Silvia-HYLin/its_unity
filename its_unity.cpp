@@ -17,25 +17,26 @@ int main(){
                 carFlow[i][j] = 0;
         }
     }
+    
     //print out initial car flow
-    printf("initial\n");
-    printout(carFlow);
-    printf("\n");
-    while(1){
+    // printf("initial\n");
+    // printout(carFlow);
+    // printf("\n");
+    while(t<1000000){
         if(lightLength<=0){ //determine which side turn when lightLength==0
-            bool temp_LEW = determineSeq1(carFlow);
+            bool temp_LEW = determineSeq8(carFlow);
             if(LEW!=temp_LEW&&(lightLength!=-1)){    //if change the light, then waitTimeLight = 0
-                printf("waiting time before light change = %d \n", waitTimeLight);
-                printf("average waiting time before light change per car = %lf \n===light change===\n", double(waitTimeLight)/waitTimePerSec);
+                // printf("waiting time before light change = %d \n", waitTimeLight);
+                // printf("average waiting time before light change per car = %lf \n===light change===\n", double(waitTimeLight)/waitTimePerSec);
                 waitTimeLight = 0;
             }
             LEW = temp_LEW;
-            if(LEW)
-                printf("East West go with ");
-            else
-                printf("South North go with ");
+            // if(LEW)
+            //     // printf("East West go with ");
+            // else
+            //     // printf("South North go with ");
             lightLength = determineLen(carFlow, LEW);
-            printf("===============\n");
+            // printf("===============\n");
         }
         //calculate waitingTime
         waitTimePerSec = waitingTime(carFlow, LEW);
@@ -94,10 +95,10 @@ int main(){
         }
         lightLength = lightLength-1;
         t++;
-        printout(carFlow);
-        printf("finish this round\nt = %2d end, lightLength left %d, waitTimePerSec = %d \n", t, lightLength, waitTimePerSec);
-        cin.get();
+        // printout(carFlow);
+        // printf("finish this round\nt = %2d end, lightLength left %d, waitTimePerSec = %d \n", t, lightLength, waitTimePerSec);
+        // cin.get();
     }
-    
+    printf("determineSeq8: %7d\n",waitTimeSum);
     return 0;
 }
