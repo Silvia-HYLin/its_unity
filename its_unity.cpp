@@ -26,7 +26,7 @@ int main(){
             bool temp_LEW = determineSeq1(carFlow);
             if(LEW!=temp_LEW&&(lightLength!=-1)){    //if change the light, then waitTimeLight = 0
                 printf("waiting time before light change = %d \n", waitTimeLight);
-                printf("average waiting time before light change per car = %d \n===light change===\n", waitTimeLight/waitTimePerSec);
+                printf("average waiting time before light change per car = %lf \n===light change===\n", double(waitTimeLight)/waitTimePerSec);
                 waitTimeLight = 0;
             }
             LEW = temp_LEW;
