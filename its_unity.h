@@ -4,7 +4,7 @@
 #include <stdlib.h>
 using namespace std;
 #define CMN 100
-#define p 0.6
+#define p 0.8
 
 void printout(int carFlow[4][CMN]){
     char symbol[4]={'E', 'W', 'S', 'N'};
