@@ -3,7 +3,7 @@
 #include <cmath>
 #include <stdlib.h>
 using namespace std;
-#define CMN 10
+#define CMN 100
 #define p 0.6
 
 void printout(int carFlow[4][CMN]){
@@ -37,7 +37,7 @@ bool determineSeq2(const int carFlow[4][CMN]){   //O(logn)
     for(int i=0;i<3;i++){
         for(int j=0;j<CMN;j++){
             if(carFlow[i][j]==1)
-                sum[i]=sum[i]+log(10-j)*carFlow[i][j];
+                sum[i]=sum[i]+log(CMN-j)*carFlow[i][j];
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
@@ -53,7 +53,7 @@ bool determineSeq3(const int carFlow[4][CMN]){   //O(sqrt(n))
     for(int i=0;i<4;i++){
         for(int j=0;j<CMN;j++){
             if(carFlow[i][j]==1)
-                sum[i]=sum[i]+sqrt(10-j)*carFlow[i][j];
+                sum[i]=sum[i]+sqrt(CMN-j)*carFlow[i][j];
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
@@ -69,7 +69,7 @@ bool determineSeq4(const int carFlow[4][CMN]){   //O(n)
     for(int i=0;i<3;i++){
         for(int j=0;j<CMN;j++){
             if(carFlow[i][j]==1)
-                sum[i]=sum[i]+(10-j)*carFlow[i][j];
+                sum[i]=sum[i]+(CMN-j)*carFlow[i][j];
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
@@ -85,7 +85,7 @@ bool determineSeq5(const int carFlow[4][CMN]){   //O(n^2)
     for(int i=0;i<4;i++){
         for(int j=0;j<CMN;j++){
             if(carFlow[i][j]==1)
-                sum[i]=sum[i]+(10-j)*(10-j)*carFlow[i][j];
+                sum[i]=sum[i]+(CMN-j)*(CMN-j)*carFlow[i][j];
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
@@ -101,7 +101,7 @@ bool determineSeq6(const int carFlow[4][CMN]){   //O(n^3)
     for(int i=0;i<4;i++){
         for(int j=0;j<CMN;j++){
             if(carFlow[i][j]==1)
-                sum[i]=sum[i]+pow((10-j),3);
+                sum[i]=sum[i]+pow((CMN-j),3);
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
@@ -117,7 +117,7 @@ bool determineSeq7(const int carFlow[4][CMN]){   //binary
     for(int i=0;i<4;i++){
         for(int j=0;j<CMN;j++){
             if(carFlow[i][j]==1)
-                sum[i]=sum[i]+pow(2,10-j);
+                sum[i]=sum[i]+pow(2,CMN-j);
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){
@@ -133,7 +133,7 @@ bool determineSeq8(const int carFlow[4][CMN]){   //O(n^n)
     for(int i=0;i<4;i++){
         for(int j=0;j<CMN;j++){
             if(carFlow[i][j]==1)
-                sum[i]=sum[i]+pow(10-j,10-j);
+                sum[i]=sum[i]+pow(CMN-j,CMN-j);
         }
     }
     if((sum[0]+sum[1])>(sum[2]+sum[3])){

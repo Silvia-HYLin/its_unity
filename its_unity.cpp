@@ -99,6 +99,6 @@ int main(){
         // printf("finish this round\nt = %2d end, lightLength left %d, waitTimePerSec = %d \n", t, lightLength, waitTimePerSec);
         // cin.get();
     }
-    printf("determineSeq8: %7d\n",waitTimeSum);
+    printf("determineSeq8: %d\n",waitTimeSum);
     return 0;
 }
